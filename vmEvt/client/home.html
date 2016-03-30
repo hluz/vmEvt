@@ -1,0 +1,47 @@
+<body>
+   {{> Page_home}}
+</body>
+
+<template name="Page_home">
+        <div>
+            {{#with plan}}
+                <div>Plan Code: {{cd}} </div>
+                <div>Plan Name: {{name}} </div>
+                <div>--- Steps ---</div>
+                <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>_id</th>
+                    <th>Desc</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each steps}}
+                    {{> PlanStep}}
+                {{/each}}
+                </tbody>
+                {{> AddPlanStep}}
+                </table>
+            {{/with}}
+        </div>
+</template>
+
+<template name="PlanStep">
+    <tr>
+        <td><button {{on "click: deleteStep"}}>delete</button></td>
+        <td>{{_id}}</td>
+        <td>{{desc}}</td>
+    </tr>
+</template>
+
+<template name="AddPlanStep">
+    <div>--- Add New Step ---</div>
+    <div>
+        <label>Description</label>
+        <input type="text" {{b 'value: desc'}}
+               placeholder="Enter Step Description">
+    </div>
+    <button {{on "click: createStep"}}>Add Step</button>
+</template>
